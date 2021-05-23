@@ -22,6 +22,23 @@ export const AccountPassivePage = () => {
     AccountPassiveData[] | null
   >(null);
 
+  const updatePassive = (passiveData: AccountPassiveData) => {
+    setPassives((current) => {
+      let newPassives = [] as AccountPassiveData[];
+      current?.forEach((passive) => {
+        if (passive.passiveId === passiveData.passiveId) {
+          newPassives.push({
+            ...passiveData,
+            passive: passive.passive,
+          });
+        } else {
+          newPassives.push(passive);
+        }
+      });
+      return newPassives;
+    });
+  };
+
   const {
     elementFilter: newElementFilter,
     toggleElement,
@@ -135,7 +152,10 @@ export const AccountPassivePage = () => {
               selectAll={selectAllElements}
             />
           </div>
-          <AccountPassiveList data={displayPassives || []} />
+          <AccountPassiveList
+            data={displayPassives || []}
+            updatePassive={updatePassive}
+          />
         </Fragment>
       )}
     </Page>

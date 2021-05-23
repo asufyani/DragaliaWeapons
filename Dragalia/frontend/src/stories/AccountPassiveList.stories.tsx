@@ -72,5 +72,10 @@ const AccountPassiveListStories = {
   parameters: {},
 };
 export default AccountPassiveListStories;
-const Template = (args: any) => <AccountPassiveList data={passiveData} />;
+const Template = (args: any) => (
+  <AccountPassiveList
+    data={passiveData}
+    updatePassive={(passiveData: AccountPassiveData) => {}}
+  />
+);
 export const Primary = Template.bind({});

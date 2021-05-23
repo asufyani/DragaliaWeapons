@@ -1,7 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { FC } from 'react';
-import { AccountPassiveGroupData } from '../../api/DataInterfaces';
+import {
+  AccountPassiveData,
+  AccountPassiveGroupData,
+} from '../../api/DataInterfaces';
 import { gray5 } from '../../Styles';
 import { AccountPassive } from './AccountPassive';
 import Accordion from '@material-ui/core/Accordion';
@@ -16,6 +19,7 @@ interface Props {
   accordionStatus?: { [key: number]: boolean };
   updateAccordion?: (id: number, status: boolean) => void;
   index: number;
+  updatePassive: (passiveData: AccountPassiveData) => void;
 }
 
 export const AccountPassiveGroup: FC<Props> = ({
@@ -23,6 +27,7 @@ export const AccountPassiveGroup: FC<Props> = ({
   updateAccordion,
   accordionStatus,
   index,
+  updatePassive,
 }) => {
   return (
     <div
@@ -56,7 +61,7 @@ export const AccountPassiveGroup: FC<Props> = ({
               margin: auto 25px auto auto;
             `}
           >
-            Owned: {owned}, Wanted: {wanted}
+            {owned ? `Owned: ${owned},` : ''} Wanted: {wanted}
           </div>
         </AccordionSummary>
         <AccordionDetails
@@ -86,7 +91,10 @@ export const AccountPassiveGroup: FC<Props> = ({
                     }
                   `}
                 >
-                  <AccountPassive data={passive} />
+                  <AccountPassive
+                    data={passive}
+                    updatePassive={updatePassive}
+                  />
                 </li>
               ))}
             </ul>

@@ -11,9 +11,10 @@ import useAccordionStatus from '../../hooks/useAccordionStatus';
 
 interface Props {
   data: AccountPassiveData[];
+  updatePassive: (passiveData: AccountPassiveData) => void;
 }
 
-export const AccountPassiveList: FC<Props> = ({ data }) => {
+export const AccountPassiveList: FC<Props> = ({ data, updatePassive }) => {
   const groups = data.reduce<AccountPassiveGroupData[]>((acc, cur) => {
     if (cur.passive !== undefined) {
       const ind = acc.findIndex(
@@ -95,6 +96,7 @@ export const AccountPassiveList: FC<Props> = ({ data }) => {
               accordionStatus={accordionStatus}
               updateAccordion={updateAccordion}
               index={index}
+              updatePassive={updatePassive}
             />
           </li>
         ))}

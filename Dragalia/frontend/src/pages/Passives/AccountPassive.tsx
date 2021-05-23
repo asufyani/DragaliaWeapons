@@ -12,9 +12,10 @@ import { Passive } from './Passive';
 
 interface Props {
   data: AccountPassiveData;
+  updatePassive: (passiveData: AccountPassiveData) => void;
 }
 
-export const AccountPassive: FC<Props> = ({ data }) => {
+export const AccountPassive: FC<Props> = ({ data, updatePassive }) => {
   const { passiveId, passive } = data;
 
   const [costs, setCosts] = useState<MaterialCosts[] | null>(null);
@@ -51,6 +52,11 @@ export const AccountPassive: FC<Props> = ({ data }) => {
       });
       res = true;
       setCostUpdate(!costUpdate);
+      updatePassive({
+        passiveId: values.passiveId,
+        owned: values.owned,
+        wanted: values.wanted,
+      });
     } catch {
       res = false;
     }
